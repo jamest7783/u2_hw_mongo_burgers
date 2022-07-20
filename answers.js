@@ -1,31 +1,49 @@
 // create 5 burgers (at least 3 should be beef)
+db.burgers.insertMany([ { protein:'tofu', cheese:true, toppings:{ ketchup:true, mustard:false, mayo:true }},
+                        { protein:'tofu', cheese:true, toppings:{ ketchup:true, mustard:false, mayo:true }},
+                        { protein:'beef', cheese:true, toppings:{ ketchup:true, mustard:false, mayo:true }},
+                        { protein:'beef', cheese:true, toppings:{ ketchup:true, mustard:false, mayo:true }},
+                        { protein:'beef', cheese:true, toppings:{ ketchup:true, mustard:false, mayo:true }},
+                        { protein:'beef', cheese:true, toppings:{ ketchup:true, mustard:false, mayo:true }}])
 
 // find all the burgers
+db.burgers.find( { } )
 
 // show just the meat of each burger
+db.burgers.find( {  }, { protein : 1 } )
 
 // show just the toppings of each burger
+db.burgers.find( {  }, { toppings : 1 } )
 
 // show everything but the cheese
+db.burgers.find( {  }, { toppings : 1 },{ protein : 1 } )
 
 // find all the burgers with beef
+db.burgers.find( { protein:'beef'  }, {  } )
 
 // find all the burgers that are not beef
+db.burgers.find( { protein:{ $ne:'beef'} }, {  } )
 
 // find the first burger with cheese
+db.burgers.find( { cheese : true } , {  } )
 
 // find one and update the first burger with cheese to have a property of 'double cheese'
+db.burgers.updateOne( { cheese : true }, { $set: { cheese:2 } } )
 
 // find the burger you updated to have double cheese
+db.burgers.find( { cheese : 2 }, { } )
 
 // find and update all the beef burgers to be 'veggie'
+db.burgers.update( { protein : 'beef' }, { $set: { protein : 'veggie' } } )
 
 // delete one of your veggie burgers
 // WRONG - dELETES ALL : db.burger.remove({meat: 'veggie'})
+db.burgers.deleteOne( {  } )
 
 // drop the collection
 //Expected Output
 //true
+db.burgers.drop(  )
 
 // drop the database
 //Expected Output
@@ -33,6 +51,7 @@
 //   "dropped": "burgers",
 //   "ok": 1
 // }
+db.dropDatabase()
 
 //
 // Bonus
